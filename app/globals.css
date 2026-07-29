@@ -67,7 +67,6 @@ a {
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 999px;
   background: rgba(23, 30, 28, .7);
-  backdrop-filter: blur(14px);
 }
 
 .logo-frame {

@@ -72,7 +72,7 @@ const challenges = [
 function Logo({ className = "" }) {
   return (
     <span className={`logo-frame ${className}`} aria-label="JIRAMA Predictive">
-      <img src="https://i.ibb.co/hRMM6S0F/Logo-removebg-preview.png" alt="Logo JIRAMA Predictive" />
+      <img src="https://i.ibb.co/VWNN1s6Y/image.png" alt="Logo JIRAMA Predictive" />
     </span>
   );
 }
