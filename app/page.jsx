@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { motion } from "motion/react";
 
 const missions = [
   {
@@ -88,7 +89,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <motion.main
+      initial={{ opacity: 0, filter: "blur(4px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <section className="hero" id="accueil">
         <img
           className="hero-image"
@@ -112,11 +117,39 @@ export default function Home() {
           <div className="nav-right">
             {isLoggedIn ? (
               <a className="login-button" href="/dashboard">
-                Dashboard <span aria-hidden="true">→</span>
+                Dashboard{" "}
+                <svg
+                  fill="currentColor"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  id="dashboard"
+                  data-name="Flat Color"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon flat-color"
+                  style={{ display: "inline-block", verticalAlign: "middle", marginLeft: "6px" }}
+                >
+                  <path id="secondary" d="M22,4V7a2,2,0,0,1-2,2H15a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h5A2,2,0,0,1,22,4ZM9,15H4a2,2,0,0,0-2,2v3a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V17A2,2,0,0,0,9,15Z" style={{ fill: "rgb(44, 169, 188)" }}></path>
+                  <path id="primary" d="M11,4v7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H9A2,2,0,0,1,11,4Zm9,7H15a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V13A2,2,0,0,0,20,11Z" style={{ fill: "currentColor" }}></path>
+                </svg>
               </a>
             ) : (
               <a className="login-button" href="/connexion">
-                Connexion <span aria-hidden="true">↪</span>
+                Connexion{" "}
+                <svg
+                  fill="currentColor"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 36 36"
+                  version="1.1"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  style={{ display: "inline-block", verticalAlign: "middle", marginLeft: "6px" }}
+                >
+                  <path d="M28,4H12a2,2,0,0,0-2,2v7h8.5L15.12,9.71a1,1,0,0,1,1.41-1.41l5.79,5.79-5.79,5.79a1,1,0,0,1-1.41-1.41L18.5,15H10V30a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4Z" />
+                  <path d="M10,13H4a1,1,0,0,0-1,1,1,1,0,0,0,1,1h6Z" />
+                </svg>
               </a>
             )}
 
@@ -224,6 +257,6 @@ export default function Home() {
           dès aujourd’hui le réseau électrique intelligent de demain.
         </p>
       </footer>
-    </main>
+    </motion.main>
   );
 }

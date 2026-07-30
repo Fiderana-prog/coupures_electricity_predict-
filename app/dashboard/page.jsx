@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import "./dashboard.css";
 
+import { motion } from "motion/react";
+
 const tabs = [
   { id: "dashboard", label: "Dashboard", icon: "grid" },
   { id: "map", label: "Carte", icon: "map" },
@@ -28,12 +30,7 @@ function Icon({ name, size = 22 }) {
 
   const icons = {
     grid: (
-      <svg {...common}>
-        <rect x="3" y="3" width="7" height="7" rx="1.5" />
-        <rect x="14" y="3" width="7" height="7" rx="1.5" />
-        <rect x="3" y="14" width="7" height="7" rx="1.5" />
-        <rect x="14" y="14" width="7" height="7" rx="1.5" />
-      </svg>
+      <svg fill="#000000" width={size} height={size} viewBox="0 0 24 24" id="dashboard" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" className="icon flat-color"><path id="secondary" d="M22,4V7a2,2,0,0,1-2,2H15a2,2,0,0,1-2-2V4a2,2,0,0,1,2-2h5A2,2,0,0,1,22,4ZM9,15H4a2,2,0,0,0-2,2v3a2,2,0,0,0,2,2H9a2,2,0,0,0,2-2V17A2,2,0,0,0,9,15Z" style={{ fill: "rgb(44, 169, 188)" }}></path><path id="primary" d="M11,4v7a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H9A2,2,0,0,1,11,4Zm9,7H15a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2h5a2,2,0,0,0,2-2V13A2,2,0,0,0,20,11Z" style={{ fill: "rgb(0, 0, 0)" }}></path></svg>
     ),
     map: (
       <svg {...common}>
@@ -73,6 +70,13 @@ function Icon({ name, size = 22 }) {
       <svg {...common}>
         <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
         <circle cx="12" cy="10" r="2.5" />
+      </svg>
+    ),
+    logout: (
+      <svg {...common}>
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <polyline points="16 17 21 12 16 7" />
+        <line x1="21" y1="12" x2="9" y2="12" />
       </svg>
     ),
   };
@@ -191,7 +195,13 @@ export default function DashboardPage() {
   const activeLabel = useMemo(() => tabs.find((item) => item.id === activeTab)?.label ?? "Dashboard", [activeTab]);
 
   return (
-    <div className="dashboard-shell">
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -15 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="dashboard-shell"
+    >
       <div className="background-overlay" />
       <header className="topbar">
         <a href="/">
@@ -206,7 +216,12 @@ export default function DashboardPage() {
         </nav>
         <div className="account-tools">
           <button type="button" className="icon-button notification-button" aria-label="Notifications"><Icon name="bell" size={28} /><span className="notification-count">3</span></button>
-          <button type="button" className="profile-button" aria-label="Profil utilisateur"><Icon name="user" size={28} /></button>
+          <div className="profile-menu-container">
+            <button type="button" className="profile-button" aria-label="Profil utilisateur"><Icon name="user" size={28} /></button>
+            <div className="profile-dropdown">
+              <a href="/" className="dropdown-item"><Icon name="logout" size={18} /> Déconnexion</a>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -258,6 +273,6 @@ export default function DashboardPage() {
           </article>
         </section>
       </main>
-    </div>
+    </motion.div>
   );
 }
